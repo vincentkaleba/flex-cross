@@ -1,0 +1,21 @@
+services:
+  bot:
+    build: .
+    volumes:
+      - .:/app
+      - ./sessions:/app/sessions
+      - /var/www/flex-hub/media:/var/www/flex-hub/media
+    environment:
+      - DATABASE_URI=${DATABASE_URI}
+      - REDIS_HOST=${REDIS_HOST}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    restart: always
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: always

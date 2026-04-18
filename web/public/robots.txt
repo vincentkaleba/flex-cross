@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hub.165.232.68.86.nip.io/sitemap.xml

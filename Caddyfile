@@ -1,0 +1,15 @@
+hub.165.232.68.86.nip.io {
+    # Serve static files from the public directory
+    root * /var/www/flex-hub
+    file_server
+    
+    # Fallback to index.html for SPA routing
+    handle {
+        try_files {path} /index.html
+    }
+}
+
+api.165.232.68.86.nip.io {
+    # Proxy all requests to the Aiohttp backend
+    reverse_proxy localhost:8080
+}

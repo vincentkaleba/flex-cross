@@ -1,0 +1,13 @@
+pyrogram
+pyromod
+tgcrypto
+motor
+pendulum
+python-dotenv
+aiohttp
+deep-translator
+langdetect
+matplotlib==3.8.3
+seaborn==0.13.2
+psutil
+
