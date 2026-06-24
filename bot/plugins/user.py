@@ -219,7 +219,7 @@ async def my_channels_callback(client: Client, callback: CallbackQuery):
     limit = 5
     skip = page * limit
     
-    cursor = db.channels.find({"added_by": callback.from_user.id, "is_active": True, "bot_id": client.me.id})
+    cursor = db.channels.find({"added_by": callback.from_user.id, "is_active": True, "bot_id": client.me.id}).sort("_id", 1)
     total_channels = await db.channels.count_documents({"added_by": callback.from_user.id, "is_active": True, "bot_id": client.me.id})
     
     channels = []

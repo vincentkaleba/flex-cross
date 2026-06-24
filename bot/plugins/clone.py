@@ -85,9 +85,10 @@ async def handle_create_clone(client: Client, callback: CallbackQuery):
             InlineKeyboardButton(i18n.get("btn_back", lang=lang, skip_emojis=True), callback_data="start")
         ]]))
 
-@Client.on_callback_query(filters.regex(r"^manage_(my|all)_clones$"))
+@Client.on_callback_query(filters.regex(r"^manage_(my|all)_clones(?:_(\d+))?$"))
 async def list_clones_callback(client: Client, callback: CallbackQuery):
     mode = callback.matches[0].group(1) # "my" or "all"
+    page = int(callback.matches[0].group(2)) if callback.matches[0].group(2) else 0
     bot_id = client.me.id
     user = await db.get_user(callback.from_user.id, bot_id)
     lang = user.language if user else "fr"
@@ -105,7 +106,7 @@ async def list_clones_callback(client: Client, callback: CallbackQuery):
         
     from ..utils.menu import Menu
     menu = Menu()
-    reply_markup = menu.get_menu("manage_clones", lang=lang, clones=clones, is_admin_mode=is_admin_mode)
+    reply_markup = menu.get_menu("manage_clones", lang=lang, clones=clones, is_admin_mode=is_admin_mode, page=page)
     await callback.edit_message_text(text, reply_markup=reply_markup)
 
 @Client.on_callback_query(filters.regex(r"^clone_info_(\d+)_(adm|usr)$"))

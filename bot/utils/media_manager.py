@@ -26,7 +26,10 @@ async def download_channel_photo(client: Client, chat):
     filepath = os.path.join(MEDIA_DIR, filename)
     
     if os.path.exists(filepath):
-        return filename # Already exists
+        try:
+            os.remove(filepath)
+        except Exception as e:
+            logger.error(f"Error removing old channel photo: {e}")
         
     try:
         await client.download_media(chat.photo.small_file_id, file_name=filepath)
@@ -40,4 +43,4 @@ async def download_channel_photo(client: Client, chat):
 def get_photo_url(filename):
     if not filename:
         return ""
-    return f"https://hub.165.232.68.86.nip.io/media/{filename}"
+    return f"https://hub.98-82-201-161.sslip.io/media/{filename}"

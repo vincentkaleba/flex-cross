@@ -9,7 +9,7 @@ services:
       - DATABASE_URI=${DATABASE_URI}
       - REDIS_HOST=${REDIS_HOST}
     ports:
-      - "8080:8080"
+      - "8086:8080"
     depends_on:
       - redis
     restart: always

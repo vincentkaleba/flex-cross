@@ -244,11 +244,33 @@ class Menu:
             ]
             
         elif menu_type == "manage_clones":
+            import math
             clones = kwargs.get("clones", [])
             is_admin_mode = kwargs.get("is_admin_mode", False)
+            page = kwargs.get("page", 0)
+            
+            limit = 10
+            total_clones = len(clones)
+            total_pages = math.ceil(total_clones / limit) if total_clones > 0 else 1
+            
+            start_idx = page * limit
+            end_idx = start_idx + limit
+            clones_page = clones[start_idx:end_idx]
+            
             buttons = []
-            for clone in clones:
+            for clone in clones_page:
                 buttons.append([InlineKeyboardButton(f"@{clone.username}", callback_data=f"clone_info_{clone.bot_id}_{'adm' if is_admin_mode else 'usr'}")])
+            
+            nav_row = []
+            if page > 0:
+                nav_row.append(InlineKeyboardButton("◀️", callback_data=f"manage_{'all' if is_admin_mode else 'my'}_clones_{page-1}"))
+            if total_pages > 1:
+                nav_row.append(InlineKeyboardButton(f"{page+1}/{total_pages}", callback_data="noop"))
+            if page < total_pages - 1:
+                nav_row.append(InlineKeyboardButton("▶️", callback_data=f"manage_{'all' if is_admin_mode else 'my'}_clones_{page+1}"))
+                
+            if nav_row:
+                buttons.append(nav_row)
             
             back_data = "start"
             buttons.append([InlineKeyboardButton(i18n.get("btn_back", lang=lang, skip_emojis=True), callback_data=back_data)])
