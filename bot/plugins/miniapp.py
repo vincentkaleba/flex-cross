@@ -34,7 +34,7 @@ async def hub_handler(client: Client, message: Message):
             return await message.reply_text(text, reply_markup=keyboard)
 
     # If user is registered (or it's the main bot calling), show the hub
-    hub_url = "https://hub.98-82-201-161.sslip.io"
+    hub_url = "https://hub.167.233.223.42.nip.io"
     
     text = (
         "<b>🚀 Flex Cross Hub - Professional</b>\n\n"

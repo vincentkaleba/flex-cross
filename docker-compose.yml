@@ -7,15 +7,15 @@ services:
       - /var/www/flex-hub/media:/var/www/flex-hub/media
     environment:
       - DATABASE_URI=${DATABASE_URI}
-      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_HOST=v-compress-redis
     ports:
       - "8086:8080"
-    depends_on:
-      - redis
+    networks:
+      - default
+      - v-compress_net
     restart: always
 
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-    restart: always
+networks:
+  v-compress_net:
+    name: v-compress_default
+    external: true

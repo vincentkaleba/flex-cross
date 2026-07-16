@@ -18,7 +18,7 @@ import {
   TrendingUp as StatsIcon
 } from 'lucide-react'
 
-const API_BASE = 'https://api.165.232.68.86.nip.io'
+const API_BASE = 'https://flexapi.167.233.223.42.nip.io'
 
 // Language to flag emoji map
 const LANG_FLAG = {

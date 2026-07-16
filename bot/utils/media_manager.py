@@ -43,4 +43,4 @@ async def download_channel_photo(client: Client, chat):
 def get_photo_url(filename):
     if not filename:
         return ""
-    return f"https://hub.98-82-201-161.sslip.io/media/{filename}"
+    return f"https://hub.167.233.223.42.nip.io/media/{filename}"
