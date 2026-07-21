@@ -14,6 +14,10 @@ services:
       - default
       - v-compress_net
     restart: always
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
 
 networks:
   v-compress_net:
